@@ -1,10 +1,4 @@
 
-# Provide sep as only the letter, don't use backslash
-# back_slash_require flag set
-# Script prepends an additional / to the sep argument
-# If chromosome and base pair position columns aren't included in the dataset, the script makes assumptions about the structure of the SNP columns
-# Script assumes that dataset has header
-
 import os
 import re
 import sys
@@ -13,7 +7,6 @@ import argparse
 import subprocess
 from datetime import datetime
 import numpy as np
-import seaborn as sns
 import pandas as pd
 import matplotlib as mpl
 import matplotlib.pyplot as plt
@@ -58,7 +51,7 @@ if __name__ == "__main__":
     parser.add_argument("--noneffect", type=str)
     parser.add_argument("--sep", type=str)
     parser.add_argument("--has_chr_and_pos", action="store_true")
-    parser.add_argument("--back_slash_required", action="store_true")
+    parser.add_argument("--slash_required", action="store_true")
     parser.add_argument("--remove_cleaned_datafiles", action="store_true")
     parser.add_argument("--input_path", type=str)
     parser.add_argument("--output_path", type=str)
@@ -77,7 +70,7 @@ if __name__ == "__main__":
     allele2 = args.noneffect
     separation_strategy_letter = args.sep
     has_chr_and_pos = args.has_chr_and_pos
-    back_slash_required = args.back_slash_required
+    slash_required = args.slash_required
     remove_cleaned_datafiles = args.remove_cleaned_datafiles
     data_file_path = args.input_path
     output_dir = args.output_path
@@ -85,7 +78,7 @@ if __name__ == "__main__":
     manhattan_generator_path = args.manhattan_path
 
     date = ''.join(str(datetime.date(datetime.now())).split('-'))
-    separation_strategy = f"\\{separation_strategy_letter}" if back_slash_required else separation_strategy_letter
+    separation_strategy = f"\\{separation_strategy_letter}" if slash_required else separation_strategy_letter
 
     cleaned_data_file_path = f'{output_dir}/{trait}_small_p_clean_data_{initials}_{date}.txt'
     bad_pvalue_file_path = f'{output_dir}/{trait}_bad_pvalues_{initials}_{date}.txt'
