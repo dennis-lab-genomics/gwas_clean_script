@@ -90,7 +90,7 @@ if __name__ == "__main__":
     cleaned_data_file_path = f'{output_dir}/{trait}_small_p_clean_data_{initials}_{date}.txt'
     bad_pvalue_file_path = f'{output_dir}/{trait}_bad_pvalues_{initials}_{date}.txt'
     description_file_path = f'{output_dir}/{trait}_qc_checks_{initials}_{date}.txt'
-    modified_data_path = f'{output_dir}/modified_{trait}_data.txt'
+    modified_data_path = f'{output_dir}/clean_{trait}_data.txt'
     manhattan_output_path = f'{output_dir}/{trait}_manhattan_{initials}_{date}'
     qq_plot_path = f'{output_dir}/{trait}_qqplot_{initials}_{date}.jpg'
 
@@ -163,8 +163,8 @@ if __name__ == "__main__":
         for i in indexes:
             row = df.iloc[i]
             file.write(f'{row[snp]} : {row[chromosome]}\n')
-
-    file.write("No non-autosomal chromosomes to report.\n")
+    else:
+        file.write("No non-autosomal chromosomes to report.\n")
 
     del indexes[:]
     index = 0
@@ -184,6 +184,7 @@ if __name__ == "__main__":
     counts = df[chromosome].value_counts()
     chroms = np.sort(list(map(int, df[chromosome].unique())))
 
+    biallelic = df[(df[allele1].isin(['a','c','g','t', 'A', 'G', 'C', 'T'])) & (df[allele2].isin(['a','c','g','t', 'A', 'G', 'C', 'T']))]
     biallelic_A1 = df[(df[allele1].isin(['a','c','g','t', 'A', 'G', 'C', 'T']))][allele1]
     biallelic_A2 = df[(df[allele2].isin(['a','c','g','t', 'A', 'G', 'C', 'T']))][allele2]
 
@@ -195,6 +196,13 @@ if __name__ == "__main__":
     # Writing chromosome distribution to text file
     for i in chroms:
         file.write(f'\nCHR{i}: {counts.loc[i]}; {counts.loc[i]/length}%')
+
+    # Writing Allele Combination Table
+    file.write('\n\n\nBiallelic Combination Table:\n')
+    for allele in biallelic[allele1].unique():
+        df_t = biallelic[biallelic[allele1]==allele]
+        file.write(f'\n  {allele}:\n')
+        file.write(f'{df_t[allele2].value_counts().to_string()}')
         
     # Writing SNP distribution to text file
     file.write('\n\n\nA1 biallelic:\n')
@@ -213,7 +221,7 @@ if __name__ == "__main__":
         
     file.close()
 
-
+ 
     # Perform Bonferronni correction
     n = df[p_value].shape[0]
     bonferronni = -math.log10(0.05/n)
@@ -249,6 +257,6 @@ if __name__ == "__main__":
 
     
     # Wrapping up
+    os.remove(cleaned_data_file_path)
     if remove_cleaned_datafiles:
-        os.remove(cleaned_data_file_path)
         os.remove(modified_data_path)
