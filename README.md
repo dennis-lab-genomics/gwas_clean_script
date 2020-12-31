@@ -46,7 +46,7 @@
 Use the shell command in the **sample_script_call.txt** file as a template.
 If a dataset has features that the script does not cover, the script will have to be modified manually to accomodate for the edge case.
 
-The **cleaning for small p-values** and **plotting manhattan** steps are very time consuming as they rely on external software. It is normal for these steps to take 10+ minutes depending on a standard personal machine.
+The **cleaning for small p-values** and **plotting manhattan** steps are very time consuming as they rely on external software. It is normal for these steps to take 10+ minutes depending on the machine.
 
 ### Note
 * If chromosome and base pair position columns aren't included in the dataset, the script makes assumptions about the structure of the SNP columns.
