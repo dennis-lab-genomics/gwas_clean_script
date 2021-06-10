@@ -1,5 +1,5 @@
-# gwas_clean_script
-
+# gwas_clean_script 
+  
 ## Script used for cleaning and quality checking GWAS Summary Statistics
 
 ## Pre-requisite Software:
