@@ -25,7 +25,8 @@
 "initials" : "DB",
 "trait" : "BMI",
 "sep" : " ",
-"input_path" : "/work/shared/data/gwas_summ_stats/BMI/bmi.giant-ukbb.meta-analysis.combined.23May2018.txt", # "/work" stands for "/project/st-dennisjk-1"
+"input_path" : "/work/shared/data/gwas_summ_stats/BMI/bmi.giant-ukbb.meta-analysis.combined.23May2018.txt",
+"_comment" : "'/work' is a link to '/project/st-dennisjk-1'"
 "output_path" : "/work/dbelikau/gwas_pipeline",
 "harmonize" : true,
 "palindromic" : 0.4,
