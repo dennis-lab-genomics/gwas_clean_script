@@ -17,9 +17,9 @@ Sample execution definition file **args.json** provided as template.
 $ python3 {path_to_args.json_file}
 ```
 
-### HPC
+### HPC (Singularity)
 ```bash
-$ python3 {path_to_args.json_file}
+$ singularity pull --force --name gwas_pipeline.sif docker://daniil4dennislab/gwas_pipeline:latest
 ```
 ```bash
 $ gwas_launch_script.sh {trait_name} {path_to_args.json_file} {approximate_size_of_summ_stat_file_in_Gb}
