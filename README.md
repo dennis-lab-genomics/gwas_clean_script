@@ -14,7 +14,7 @@ Sample execution definition file **args.json** provided as template.
 
 ### Local
 ```bash
-$ python3 {path_to_args.json_file}
+$ python3 gwas_process.py {path_to_args.json_file}
 ```
 
 ### HPC (Singularity)
