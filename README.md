@@ -24,6 +24,8 @@ $ python3 gwas_process.py {path_to_args.json_file}
 
 ### HPC (Singularity)
 
+If running from Sockeye HPC, remember to run the code from the head-node (your home directory). 
+
 ```bash
 $ singularity pull --force --name gwas_pipeline.sif docker://daniil4dennislab/gwas_pipeline:latest
 ```
@@ -135,3 +137,11 @@ $ gwas_launch_script.sh {trait_name} {path_to_args.json_file} {approximate_size_
 
 ## Acknowledgements:
 This script uses an R package created at Vanderbilt University. 
+
+
+
+## Possible bugs
+
+* On sockeye, summary stats need to be on the scratch folder to avoid errors 
+* Seeting harmonize to false solved random error in the 1085 code line of the gwas_pipeline.py script
+
