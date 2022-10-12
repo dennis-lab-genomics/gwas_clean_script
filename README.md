@@ -9,8 +9,13 @@
 * [manhattan_generator](https://github.com/pgxcentre/manhattan_generator)
 * [pyliftover](https://pypi.org/project/pyliftover/)
 
-## Running the pipeline
-Sample execution definition file **args.json** provided as template.
+
+## Input files: 
+* arguments file (sample execution definition file **args.json** provided as template)
+* summary stats: header should be undocumented (no #) and colnames should not have spaces. 
+
+
+## Running the pipeline:
 
 ### Local
 ```bash
@@ -18,13 +23,16 @@ $ python3 gwas_process.py {path_to_args.json_file}
 ```
 
 ### HPC (Singularity)
+
 ```bash
 $ singularity pull --force --name gwas_pipeline.sif docker://daniil4dennislab/gwas_pipeline:latest
 ```
 ```bash
 $ gwas_launch_script.sh {trait_name} {path_to_args.json_file} {approximate_size_of_summ_stat_file_in_Gb}
 ```
-*Modify the paths in **gwas_launch_script.sh** to work on your system.
+* Note: If using this script outside Dennis-lab HPC (sockeye), please modify the paths in **gwas_launch_script.sh** to work on your system.
+
+
 
 ## Procedures performed by the pipeline:
 * Record meta-data of the pipeline execution:
